@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo app</title>
+  </head>
+  <body>
+    <h1>This is the template of the todo app</h1>
+    <ul>
+      {% for todo_item in all_items %}
+        <li> {{todo_item.content}}
+          <form action="/deleteTodo/{{todo_item.id}}/"
+                style= "display : inline"
+                method="post">{% csrf_token %} <!-- Como se necesita crear algo en la base de datos
+          entonces se utiliza el post no el get el csrf_token es propio de Django-->
+            <input type="submit" value="Delete"/>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+    <form action="/addTodo/" method="post">{% csrf_token %} <!-- Como se necesita crear algo en la base de datos
+    entonces se utiliza el post no el get el csrf_token es propio de Django-->
+      <input type="text" name="content"/>
+      <input type="submit" value="Add"/>
+    </form>
+  </body>
+</html>
